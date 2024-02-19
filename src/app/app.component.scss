@@ -18,15 +18,18 @@
 header {
   background-color: var(--header-bgcolor);
   grid-area: header;
+  padding: 10px;
+  border-bottom: 1px solid #171B26;
 }
 
 main {
-  background-color: #b2ee94;
+  background-color: var(--main-bgcolor);
   grid-area: main;
 }
 
 footer {
-  background-color: #c08bfd;
+  border-top: 1px solid #171B26;
+  background-color: var(--footer-bgcolor);
   grid-area: footer;
 }
 

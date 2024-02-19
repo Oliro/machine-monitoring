@@ -1,14 +1,29 @@
 .container {
-    display: flex;
-    justify-content:space-around;
-    align-items: center;
-    height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
 }
 
 .logo {
-
+  display: flex;
+  align-items: center;
+  color: #fff;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 .logo__text {
-    color: #fff;
+  padding-left: 1px;
+}
+
+.logo__icon svg {
+  width: 14px;
+  fill: #fff;
+}
+
+.navigation {
+  color: #fff;
+  padding-left: 20px;
+  padding-right: 20px;
 }
