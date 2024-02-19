@@ -1,0 +1,31 @@
+.layout {
+  display: grid;
+  grid-template-rows: 60px auto 60px;
+  grid-template-columns: 1fr;
+  grid-template-areas: "header" "main" "footer";
+  height: 100vh;
+}
+
+@media (min-width: 480px) {
+  .layout {
+    display: grid;
+    grid-template-rows: 60px auto 60px;
+    grid-template-columns: 1fr;
+    grid-template-areas: "header" "main" "footer";
+  }
+}
+
+header {
+  background-color: #c08bfd;
+  grid-area: header;
+}
+
+main {
+  background-color: #b2ee94;
+  grid-area: main;
+}
+
+footer {
+  background-color: #c08bfd;
+  grid-area: footer;
+}
