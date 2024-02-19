@@ -16,7 +16,7 @@
 }
 
 header {
-  background-color: #c08bfd;
+  background-color: var(--header-bgcolor);
   grid-area: header;
 }
 
@@ -28,4 +28,30 @@ main {
 footer {
   background-color: #c08bfd;
   grid-area: footer;
+}
+
+
+/* Estilos para smartphones em modo retrato (portrait) */
+@media (max-width: 576px) {
+
+}
+
+/* Estilos para smartphones em modo paisagem (landscape) */
+@media (min-width: 576px) and (max-width: 768px) {
+
+}
+
+/* Estilos para tablets (iPad, Android) */
+@media (min-width: 768px) and (max-width: 992px) {
+
+}
+
+/* Estilos para laptops e desktops */
+@media (min-width: 992px) and (max-width: 1200px) {
+
+}
+
+/* Estilos para desktops maiores */
+@media (min-width: 1200px) {
+
 }
