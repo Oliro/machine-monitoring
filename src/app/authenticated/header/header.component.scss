@@ -3,18 +3,14 @@
   justify-content: space-between;
   align-items: center;
   height: 100%;
+  padding-left: 20px;
+  padding-right: 20px;
+  color: #fff;
 }
 
 .logo {
   display: flex;
   align-items: center;
-  color: #fff;
-  padding-left: 20px;
-  padding-right: 20px;
-}
-
-.logo__text {
-  padding-left: 1px;
 }
 
 .logo__icon svg {
@@ -22,8 +18,8 @@
   fill: #fff;
 }
 
+.logo__text {
+}
+
 .navigation {
-  color: #fff;
-  padding-left: 20px;
-  padding-right: 20px;
 }
