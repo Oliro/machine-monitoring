@@ -1,0 +1,31 @@
+<div class="container-table">
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Tipo</th>
+        <th>Status</th>
+        <th>Alert</th>
+        <th>Perfomance</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (item of items; track $index) {
+      <tr>
+        <td>Jill</td>
+        <td>Smith</td>
+        <td>50</td>
+        <td>50</td>
+        <td>50</td>
+        <td>50</td>
+      </tr>
+      }
+      @empty {
+        <tr>
+          <td colspan="6">Nenhum resultado encontrado.</td>
+        </tr>
+         }
+    </tbody>
+  </table>
+</div>

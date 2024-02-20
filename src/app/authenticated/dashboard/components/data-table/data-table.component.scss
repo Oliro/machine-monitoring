@@ -1,0 +1,61 @@
+.container-table {
+  overflow-x: auto;
+  overflow-y: auto;
+  white-space: nowrap;
+  width: 100%;
+  height: 13rem;
+  background-color: #fff;
+  -webkit-overflow-scrolling: touch;
+  border-radius: 0.5rem;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+thead {
+  color: #fff;
+  background-color: #6665FF;
+}
+
+th {
+  border: 1px solid;
+  border-color:#2D69EB;
+}
+
+td {
+  border: 1px solid;
+  border-color: #e5e6e7;
+}
+
+th,
+td {
+  text-align: center;
+  padding: 0.7rem 0.2rem 0.7rem 0.2rem;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+/* Estilo para a barra de rolagem */
+::-webkit-scrollbar {
+  width: 12px;
+  height: 14px;
+}
+
+/* Cor do fundo da barra de rolagem */
+::-webkit-scrollbar-track {
+  background-color: #e8f7fb;
+}
+
+/* Cor do indicador da barra de rolagem (o "polegar") */
+::-webkit-scrollbar-thumb {
+  background-color: #d6e7eb;
+}
+
+/* Cor quando o indicador é pressionado/navegado */
+::-webkit-scrollbar-thumb:hover {
+  background-color: #114b68;
+}
