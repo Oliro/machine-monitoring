@@ -1,0 +1,35 @@
+.container-flex {
+  //   display: flex;
+  //   flex-wrap: wrap;
+  //   justify-content: space-around;
+  //   align-items: center;
+  //   gap: 1rem;
+}
+
+.container-flex__bar {
+  color: #fff;
+  padding: 2rem 0 2rem 0;
+  width: 100%;
+}
+
+.container-flex__bar__title {
+  display: flex;
+  align-items: flex-start;
+}
+
+.icon {
+  margin-right: 0.6rem;
+}
+
+.icon svg {
+  width: 15px;
+  fill: #fff;
+}
+
+hr {
+  height: 0.01rem; 
+  border: none;
+  background-color: #5F5DA6;
+  margin: 10px 0; 
+}
+
