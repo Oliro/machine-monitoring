@@ -11,6 +11,10 @@ export class EquipmentsState {
 
   equipments$ = this._equipments.asObservable();
 
+  getEquipment(equipments: Equipment[]) {
+    this._equipments.next(equipments)
+  }
+
   constructor() { }
 
 }

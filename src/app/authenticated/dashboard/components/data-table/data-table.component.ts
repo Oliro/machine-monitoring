@@ -11,9 +11,7 @@ import { CommonModule } from '@angular/common';
 })
 export class DataTableComponent implements OnInit {
 
-  public items: any[] = [];
-
-  constructor( public facade: FacadeService){}
+  constructor( public facade: FacadeService ){}
 
   ngOnInit(): void {
     this.facade.load();
