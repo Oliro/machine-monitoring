@@ -2,9 +2,10 @@
   <table>
     <thead>
       <tr>
-        <th>Name</th>
-        <th>Tipo</th>
-        <th>Status</th>
+        <th>Nome</th>
+        <th>Modelo</th>
+        <th>Estado</th>
+        <th>Último Sinal</th>
         <th>Alert</th>
         <th>Perfomance</th>
         <th>Description</th>
@@ -13,12 +14,19 @@
     <tbody>
       @for (item of facade.equipments$ | async; track $index) {
       <tr>
+
         <td>{{item.name}}</td>
-        <td>Smith</td>
+        <td>{{item.equipmentsModels.name}}</td>
+        <td>
+          <span class="badge" [ngStyle]="{'background-color': facade.getLatestState(item.equipmentsStatesHistory.states).state?.color}">
+          {{ facade.getLatestState(item.equipmentsStatesHistory.states).state?.name }}
+        </span>
+        </td>
+        <td>{{ facade.getLatestState(item.equipmentsStatesHistory.states).lastDate | date : 'dd/MM/yyyy HH:mm' }}</td>
         <td>50</td>
         <td>50</td>
         <td>50</td>
-        <td>50</td>
+
       </tr>
       }
       @empty {

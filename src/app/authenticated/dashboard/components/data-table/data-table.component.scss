@@ -17,6 +17,8 @@ table {
 thead {
   color: #fff;
   background-color: #6665FF;
+  position: sticky;
+  top: 0;
 }
 
 th {
@@ -58,4 +60,17 @@ tr:nth-child(even) {
 /* Cor quando o indicador é pressionado/navegado */
 ::-webkit-scrollbar-thumb:hover {
   background-color: #114b68;
+}
+
+.badge {
+  display: inline-block;
+  padding: 0.35rem 0.65rem;
+  font-size: 0.65rem;
+  font-weight:700;
+  line-height: 1;
+  color: #fff;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: 10px;
 }
