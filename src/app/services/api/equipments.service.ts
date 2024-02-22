@@ -6,6 +6,7 @@ import { Equipment } from '../../models/equipment';
 import { EquipmentModel } from '../../models/equipment-model';
 import { EquipmentPositionHistory } from '../../models/equipment-position-history';
 import { EquipmentStateHistory } from '../../models/equipment-state-history';
+import { EquipmentState } from '../../models/equipment-state';
 
 @Injectable({
   providedIn: 'root'
@@ -28,6 +29,10 @@ export class EquipmentsService extends BaseService {
 
   getEquipmentsStatesHistory(): Observable<EquipmentStateHistory[]> {
     return this.http.get<EquipmentStateHistory[]>(this.urlServiceV1 + 'equipmentsStatesHistory')
+  }
+
+  getEquipmentsStates(): Observable<EquipmentState[]> {
+    return this.http.get<EquipmentState[]>(this.urlServiceV1 + 'equipmentsStates')
   }
 
 }
