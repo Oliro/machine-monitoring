@@ -89,8 +89,8 @@ export class FacadeService {
 
   calculateProductivity(equipment: EquipmentStateHistory) {
 
-    const selectedDate = "2021-02-20";
-    //let previousState = null;
+    const selectedDate = "2021-02-27";
+
     let previousDate: any = null;
     let getlastStatePreviousDay = 0;
 
@@ -159,16 +159,18 @@ export class FacadeService {
         }
 
       }
-      //previousState = stateName
       previousDate = state.date
     })
 
     console.log(
+      equipment.equipmentId,
       equipmenSumtHours.operando, equipmenSumtHours.parado, equipmenSumtHours.manutencao,
       equipmenSumtHours.operando + equipmenSumtHours.parado + equipmenSumtHours.manutencao
     )
 
-  }
+    return equipmenSumtHours;
+  } 
+
 
   calculateGainEquipment(equipment: MachineMonitor) {
 
@@ -195,9 +197,5 @@ export class FacadeService {
     const dataAnterior = new Date(dataAtual.getTime() - umDia);
     return dataAnterior.toISOString().split('T')[0];
   }
-
-
-
-
 
 }

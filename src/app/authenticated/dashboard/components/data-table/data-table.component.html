@@ -23,7 +23,11 @@
         </span>
         </td>
         <td>{{ facade.getLatestState(item.equipmentsStatesHistory.states).lastDate | date : 'dd/MM/yyyy HH:mm' }}</td>
-        <td>{{facade.calculateProductivity(item.equipmentsStatesHistory)  }}</td>
+        <td>
+          <span class="badge-performance">
+            {{facade.calculateProductivity(item.equipmentsStatesHistory).operando / 24 | percent }}
+          </span>
+        </td>
         <td>{{facade.calculateGainEquipment(item)}}</td>
         <td></td>
 

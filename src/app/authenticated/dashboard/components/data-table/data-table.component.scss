@@ -74,3 +74,16 @@ tr:nth-child(even) {
   vertical-align: baseline;
   border-radius: 10px;
 }
+
+.badge-performance {
+   display: inline-block;
+  font-size: 0.65rem;
+  padding: 10px 5px 10px 5px;
+  line-height: 1;
+  background: #636AF2;
+  text-align: center;
+  white-space: nowrap;
+  border-radius: 50%;
+  vertical-align: baseline;
+  color:white;
+}
