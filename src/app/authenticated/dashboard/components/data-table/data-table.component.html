@@ -19,27 +19,31 @@
         <td>{{item.name}}</td>
         <td>{{item.equipmentsModels.name}}</td>
         <td>
-          <span class="badge" [ngStyle]="{'background-color': facade.getLatestState(item.equipmentsStatesHistory.states).state.color}">
-          {{ facade.getLatestState(item.equipmentsStatesHistory.states).state.name }}
-        </span>
+          <span class="badge"
+            [ngStyle]="{'background-color': facade.getLatestState(item.equipmentsStatesHistory.states).state.color}">
+            {{ facade.getLatestState(item.equipmentsStatesHistory.states).state.name }}
+          </span>
         </td>
         <td>{{ facade.getLatestState(item.equipmentsStatesHistory.states).lastDate | date : 'dd/MM/yyyy HH:mm' }}</td>
         <td><i class="fa-regular fa-calendar-days icon-calendar"></i></td>
         <td>
-          <span class="badge-performance">
-            {{facade.calculateProductivity(item.equipmentsStatesHistory).operando / 24 | percent }}
+          @if (facade.calculateProductivity(item, item.equipmentsStatesHistory).equipmentSumtHours.operando; as equipmentData) {
+          <span class="badge-performance"
+            [ngStyle]="{'background-color': facade.getPerformanceColorType(equipmentData)}">
+            {{equipmentData / 24 | percent }}
           </span>
+          }
         </td>
-        <td>{{facade.calculateGainEquipment(item)}}</td>
+        <td class="text-gain">{{facade.calculateProductivity(item, item.equipmentsStatesHistory).gainEquipement}}</td>
         <td></td>
 
       </tr>
       }
       @empty {
-        <tr>
-          <td colspan="6">Nenhum resultado encontrado.</td>
-        </tr>
-         }
+      <tr>
+        <td colspan="6">Nenhum resultado encontrado.</td>
+      </tr>
+      }
     </tbody>
   </table>
 </div>

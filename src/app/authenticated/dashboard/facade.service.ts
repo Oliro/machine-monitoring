@@ -3,9 +3,10 @@ import { EquipmentsService } from '../../services/api/equipments.service';
 import { EquipmentsState } from '../../services/states/equipments.state';
 import { forkJoin, map, tap } from 'rxjs';
 import { EnumEquipmentState, EnumEquipmentStateColor } from '../../models/equipment-state.enum';
-import { MachineMonitor } from '../../models/machine-monitor';
 import { EquipmentStateHistory } from '../../models/equipment-state-history';
 import { EquipmentState } from '../../models/equipment-state';
+import { EquipmentModel, HourlyEarning } from '../../models/equipment-model';
+import { MachineMonitor } from '../../models/machine-monitor';
 
 @Injectable({
   providedIn: 'root'
@@ -76,16 +77,16 @@ export class FacadeService {
     }
   }
 
-  calculateProductivity(equipment: EquipmentStateHistory) {
+  calculateProductivity(equipment: MachineMonitor, equipmentState: EquipmentStateHistory) {
 
     const selectedDate = "2021-02-27";
 
     let previousDate: any = null;
     let getlastStatePreviousDay = 0;
 
-    let equipmenSumtHours = {operando:0,manutencao:0,parado:0}
+    let equipmentSumtHours = { operando: 0, manutencao: 0, parado: 0 };
 
-    equipment.states.forEach((state) => {
+    equipmentState.states.forEach((state) => {
 
       const isDateSelected = state.date.startsWith(selectedDate);
       const isDatePreviousDay = state.date.startsWith(this.getPreviousDay(selectedDate));
@@ -129,13 +130,13 @@ export class FacadeService {
 
         switch (stateName) {
           case this.stateData[0].name:
-            equipmenSumtHours.operando += Math.ceil(diffHoras)
+            equipmentSumtHours.operando += Math.ceil(diffHoras)
             break;
           case this.stateData[1].name:
-            equipmenSumtHours.parado += Math.ceil(diffHoras)
+            equipmentSumtHours.parado += Math.ceil(diffHoras)
             break;
           case this.stateData[2].name:
-            equipmenSumtHours.manutencao += Math.ceil(diffHoras)
+            equipmentSumtHours.manutencao += Math.ceil(diffHoras)
             break;
         }
 
@@ -147,25 +148,39 @@ export class FacadeService {
       previousDate = state.date
     })
 
-    return equipmenSumtHours;
-  } 
+    const gainEquipement = this.calculateGainEquipment(equipment, equipmentSumtHours);
 
+    return { equipmentSumtHours, gainEquipement };
+  }
 
-  calculateGainEquipment(equipment: MachineMonitor) {
+  calculateGainEquipment(equipment: MachineMonitor, equipmentSumtHours: any) {
 
-    let totalEarnings = 0;
+    const equipmentModelEarnings = { operando: 0, parado: 0, manutencao: 0 }
 
-    equipment.equipmentsStatesHistory.states.forEach(state => {
-      const hourlyEarning = equipment.equipmentsModels.hourlyEarnings.find(hourly =>
-        hourly.equipmentStateId === state.equipmentStateId
-      );
-
-      if (hourlyEarning) {
-        totalEarnings += hourlyEarning.value;
+    equipment.equipmentsModels.hourlyEarnings.forEach((item) => {
+      const equipmentEarning = this.stateData.find(state => state.id == item.equipmentStateId);
+      switch (equipmentEarning?.name) {
+        case 'Operando':
+          equipmentModelEarnings.operando = item.value
+          break;
+        case 'Parado':
+          equipmentModelEarnings.parado = item.value
+          break;
+        case 'Manutenção':
+          equipmentModelEarnings.manutencao = item.value
+          break;
+        default:
+          break;
       }
     });
 
-    return totalEarnings;
+    const _gainEquipement =
+      (equipmentSumtHours.operando * equipmentModelEarnings.operando) +
+      (equipmentSumtHours.manutencao * equipmentModelEarnings.manutencao) +
+      (equipmentSumtHours.parado * equipmentModelEarnings.parado);
+
+    return _gainEquipement;
+
   }
 
   getPreviousDay(data: string) {
@@ -175,4 +190,15 @@ export class FacadeService {
     return prevDate.toISOString().split('T')[0];
   }
 
+  getPerformanceColorType(value: number): string {
+    value = value/24*100; //percent for 24 hours
+    if (value > 60) {
+      return '#2ecc71';
+    } else if (value > 30) {
+      return '#f1c40f';
+    } else 
+    return '#e74c3c';
+  }
 }
+
+
