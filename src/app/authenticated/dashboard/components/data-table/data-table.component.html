@@ -6,6 +6,7 @@
         <th>Modelo</th>
         <th>Estado</th>
         <th>Último Sinal</th>
+        <th>Data</th>
         <th>Produtividade</th>
         <th>Ganho</th>
         <th>Descrição</th>
@@ -18,11 +19,12 @@
         <td>{{item.name}}</td>
         <td>{{item.equipmentsModels.name}}</td>
         <td>
-          <span class="badge" [ngStyle]="{'background-color': facade.getLatestState(item.equipmentsStatesHistory.states).state?.color}">
-          {{ facade.getLatestState(item.equipmentsStatesHistory.states).state?.name }}
+          <span class="badge" [ngStyle]="{'background-color': facade.getLatestState(item.equipmentsStatesHistory.states).state.color}">
+          {{ facade.getLatestState(item.equipmentsStatesHistory.states).state.name }}
         </span>
         </td>
         <td>{{ facade.getLatestState(item.equipmentsStatesHistory.states).lastDate | date : 'dd/MM/yyyy HH:mm' }}</td>
+        <td><i class="fa-regular fa-calendar-days icon-calendar"></i></td>
         <td>
           <span class="badge-performance">
             {{facade.calculateProductivity(item.equipmentsStatesHistory).operando / 24 | percent }}

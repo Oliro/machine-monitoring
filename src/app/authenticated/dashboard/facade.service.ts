@@ -48,7 +48,7 @@ export class FacadeService {
       })
     ).subscribe(equipmentsWithForeignKeys => {
 
-      console.log(equipmentsWithForeignKeys);
+      //console.log(equipmentsWithForeignKeys);
 
       return this.api.getEquipments().subscribe(response => this.state.equipments(equipmentsWithForeignKeys));
 
@@ -57,23 +57,13 @@ export class FacadeService {
   }
 
   getLatestState(states: any) {
-
-    if (!states || states.length === 0) {
-      return { date: 'N/A' };
-    }
-
     const latestState = states.sort((a: any, b: any) => new Date(b.date).getTime() - new Date(a.date).getTime())[0];
-
     const lastDate = latestState.date;
-
     const state = this.styleState(latestState.equipmentStateId);
-
     return { lastDate, state }
-
   }
 
   styleState(state: any) {
-
     switch (state) {
       case EnumEquipmentState.Operando:
         return { color: EnumEquipmentStateColor.Operando, name: 'Operando' };
@@ -84,7 +74,6 @@ export class FacadeService {
       default:
         return { color: '#ffffff', name: 'Desconhecido' };
     }
-
   }
 
   calculateProductivity(equipment: EquipmentStateHistory) {
@@ -94,16 +83,12 @@ export class FacadeService {
     let previousDate: any = null;
     let getlastStatePreviousDay = 0;
 
-    let equipmenSumtHours = {
-      operando: 0,
-      manutencao: 0,
-      parado: 0
-    }
+    let equipmenSumtHours = {operando:0,manutencao:0,parado:0}
 
     equipment.states.forEach((state) => {
 
       const isDateSelected = state.date.startsWith(selectedDate);
-      const isDatePreviousDay = state.date.startsWith(this.getDataAnterior(selectedDate));
+      const isDatePreviousDay = state.date.startsWith(this.getPreviousDay(selectedDate));
 
       if (!(isDateSelected || isDatePreviousDay)) return;
 
@@ -162,12 +147,6 @@ export class FacadeService {
       previousDate = state.date
     })
 
-    console.log(
-      equipment.equipmentId,
-      equipmenSumtHours.operando, equipmenSumtHours.parado, equipmenSumtHours.manutencao,
-      equipmenSumtHours.operando + equipmenSumtHours.parado + equipmenSumtHours.manutencao
-    )
-
     return equipmenSumtHours;
   } 
 
@@ -189,13 +168,11 @@ export class FacadeService {
     return totalEarnings;
   }
 
-
-  // Função para obter a data anterior
-  getDataAnterior(data: string) {
-    const dataAtual = new Date(data);
-    const umDia = 24 * 60 * 60 * 1000; // em milissegundos
-    const dataAnterior = new Date(dataAtual.getTime() - umDia);
-    return dataAnterior.toISOString().split('T')[0];
+  getPreviousDay(data: string) {
+    const currentDate = new Date(data);
+    const oneDay = 24 * 60 * 60 * 1000; // em milissegundos
+    const prevDate = new Date(currentDate.getTime() - oneDay);
+    return prevDate.toISOString().split('T')[0];
   }
 
 }
