@@ -7,6 +7,7 @@ import { EquipmentStateHistory } from '../../models/equipment-state-history';
 import { EquipmentState } from '../../models/equipment-state';
 import { EquipmentModel, HourlyEarning } from '../../models/equipment-model';
 import { MachineMonitor } from '../../models/machine-monitor';
+import { PieChartEquipmentData } from '../../models/pie-chart-equipment-data';
 
 @Injectable({
   providedIn: 'root'
@@ -199,6 +200,19 @@ export class FacadeService {
     } else 
     return '#e74c3c';
   }
+
+  createPieChartEquipmentData(equipmentSumtHours: any){
+
+    const pieChartEquipmentData: PieChartEquipmentData[] = [
+      {title: this.stateData[0].name, value: equipmentSumtHours.operando, color: this.stateData[0].color},
+      {title: this.stateData[1].name, value: equipmentSumtHours.parado, color: this.stateData[1].color},
+      {title: this.stateData[2].name, value: equipmentSumtHours.manutencao, color: this.stateData[2].color}
+    ]
+
+    this.state.pieChartEquipmentData(pieChartEquipmentData);
+
+  }
+
 }
 
 
