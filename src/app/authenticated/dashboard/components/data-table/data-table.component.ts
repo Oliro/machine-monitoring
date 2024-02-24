@@ -11,10 +11,14 @@ import { CommonModule } from '@angular/common';
 })
 export class DataTableComponent implements OnInit {
 
-  constructor( public facade: FacadeService ){}
+  constructor(public facade: FacadeService) { }
 
   ngOnInit(): void {
     this.facade.load();
+  }
+
+  equipmentDatails(quipmentSumtHours: any) {
+    this.facade.createPieChartEquipmentData(quipmentSumtHours)
   }
 
 }

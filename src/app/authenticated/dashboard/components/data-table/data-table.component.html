@@ -16,7 +16,7 @@
       @for (item of facade.equipments$ | async; track $index) {
       <tr>
 
-        <td>{{item.name}}</td>
+        <td class="onclick-table" (click)="equipmentDatails(facade.calculateProductivity(item, item.equipmentsStatesHistory).equipmentSumtHours)">{{item.name}}</td>
         <td>{{item.equipmentsModels.name}}</td>
         <td>
           <span class="badge"
