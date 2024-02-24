@@ -17,7 +17,7 @@
   align-items: flex-start;
 }
 
-.icon {
+.icon__bar {
   margin-right: 0.6rem;
 }
 
@@ -31,5 +31,23 @@ hr {
   border: none;
   background-color: #5F5DA6;
   margin: 10px 0; 
+}
+
+.container-flex__details {
+  color: #7E8586;
+  padding: 2rem 0 0rem 0;
+  width: 100%;
+}
+
+.container-flex__details__title {
+  background-color: #E8ECEC;
+  padding: 0.7rem 0 0.7rem 1.5rem;
+  border: 1px #dfd9d9 solid
+}
+
+.icon__details {
+  margin-right: 0.6rem;
+  color: #3B729D;
+  font-size: 1.2rem;
 }
 
