@@ -59,7 +59,7 @@ export class FacadeService {
   }
 
   getLatestState(states: any) {
-    const latestState = states.sort((a: any, b: any) => new Date(b.date).getTime() - new Date(a.date).getTime())[0];
+    const latestState = states.equipmentsStatesHistory.states.sort((a: any, b: any) => new Date(b.date).getTime() - new Date(a.date).getTime())[0];
     const lastDate = latestState.date;
     const state = this.styleState(latestState.equipmentStateId);
     return { lastDate, state }
@@ -78,7 +78,7 @@ export class FacadeService {
     }
   }
 
-  calculateProductivity(equipment: MachineMonitor, equipmentState: EquipmentStateHistory) {
+  calculateProductivity(equipment: MachineMonitor) {
 
     const selectedDate = "2021-02-27";
 
@@ -87,7 +87,7 @@ export class FacadeService {
 
     let equipmentSumtHours = { operando: 0, manutencao: 0, parado: 0 };
 
-    equipmentState.states.forEach((state) => {
+    equipment.equipmentsStatesHistory.states.forEach((state) => {
 
       const isDateSelected = state.date.startsWith(selectedDate);
       const isDatePreviousDay = state.date.startsWith(this.getPreviousDay(selectedDate));
@@ -212,6 +212,17 @@ export class FacadeService {
     this.state.pieChartEquipmentData(pieChartEquipmentData);
 
   }
+
+
+
+
+
+
+
+
+
+
+
 
 }
 

@@ -14,11 +14,11 @@
 
 .container-flex__bar__title {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
 }
 
 .icon__bar {
-  margin-right: 0.6rem;
+  margin-right: 0.5rem;
 }
 
 .icon svg {
@@ -41,13 +41,15 @@ hr {
 
 .container-flex__details__title {
   background-color: #E8ECEC;
-  padding: 0.7rem 0 0.7rem 1.5rem;
-  border: 1px #dfd9d9 solid
+  padding: 0.5rem 0 0.5rem 1.5rem;
+  border: 1px #dfd9d9 solid;
+  display: flex;
+  align-items: center;
 }
 
 .icon__details {
-  margin-right: 0.6rem;
+  margin-right: 0.4rem;
   color: #3B729D;
-  font-size: 1.2rem;
+  font-size: 1.5rem;
 }
 

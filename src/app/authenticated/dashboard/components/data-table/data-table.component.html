@@ -16,25 +16,25 @@
       @for (item of facade.equipments$ | async; track $index) {
       <tr>
 
-        <td class="onclick-table" (click)="equipmentDatails(facade.calculateProductivity(item, item.equipmentsStatesHistory).equipmentSumtHours)">{{item.name}}</td>
+        <td class="onclick-table" (click)="equipmentDatails(facade.calculateProductivity(item).equipmentSumtHours)">{{item.name}}</td>
         <td>{{item.equipmentsModels.name}}</td>
         <td>
           <span class="badge"
-            [ngStyle]="{'background-color': facade.getLatestState(item.equipmentsStatesHistory.states).state.color}">
-            {{ facade.getLatestState(item.equipmentsStatesHistory.states).state.name }}
+            [ngStyle]="{'background-color': facade.getLatestState(item).state.color}">
+            {{ facade.getLatestState(item).state.name }}
           </span>
         </td>
-        <td>{{ facade.getLatestState(item.equipmentsStatesHistory.states).lastDate | date : 'dd/MM/yyyy HH:mm' }}</td>
+        <td>{{ facade.getLatestState(item).lastDate | date : 'dd/MM/yyyy HH:mm' }}</td>
         <td></td>
         <td>
-          @if (facade.calculateProductivity(item, item.equipmentsStatesHistory).equipmentSumtHours.operando; as equipmentData) {
+          @if (facade.calculateProductivity(item).equipmentSumtHours.operando; as equipmentData) {
           <span class="badge-performance"
             [ngStyle]="{'background-color': facade.getPerformanceColorType(equipmentData)}">
             {{equipmentData / 24 | percent }}
           </span>
           }
         </td>
-        <td class="text-gain">{{facade.calculateProductivity(item, item.equipmentsStatesHistory).gainEquipement}}</td>
+        <td class="text-gain">{{facade.calculateProductivity(item).gainEquipement}}</td>
         <td></td>
 
       </tr>

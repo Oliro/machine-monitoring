@@ -1,7 +1,24 @@
-<div>
-    <button type="button" class="collapsible">Open Collapsible</button>
+<button type="button" class="filter--btn" (click)="mep.expanded = !mep.expanded">
+    <i class="material-icons">filter_alt</i> Filtro
+</button>
+<div class="filter">
+    <mat-expansion-panel #mep="matExpansionPanel">
+        <h5>Aplicar Filtro</h5>
+        <div class="filter__form">
 
-    <div class="content">
-        <span>teste</span>  
-    </div>
+            <label for="selectDate">Selecione a data</label>
+            <mat-form-field>
+                <mat-date-range-input [rangePicker]="picker">
+                    <input name="selectDate" matStartDate placeholder="Data Inicial" [(ngModel)]="startDate">
+                    <input name="selectDate" matEndDate placeholder="Data Final" [(ngModel)]="endDate">
+                </mat-date-range-input>
+                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-date-range-picker #picker></mat-date-range-picker>
+            </mat-form-field>
+
+            <br>
+            <input type="submit" value="Limpar Filtro">
+        </div>
+
+    </mat-expansion-panel>
 </div>
