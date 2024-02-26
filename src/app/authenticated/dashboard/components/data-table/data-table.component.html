@@ -25,7 +25,7 @@
           </span>
         </td>
         <td>{{ facade.getLatestState(item.equipmentsStatesHistory.states).lastDate | date : 'dd/MM/yyyy HH:mm' }}</td>
-        <td><input type="date" id="birthday" name="birthday"></td>
+        <td></td>
         <td>
           @if (facade.calculateProductivity(item, item.equipmentsStatesHistory).equipmentSumtHours.operando; as equipmentData) {
           <span class="badge-performance"
