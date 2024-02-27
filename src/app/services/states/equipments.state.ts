@@ -16,11 +16,13 @@ export class EquipmentsState {
   pieChartEquipmentData$ = this._pieChartEquipmentData.asObservable();
 
   equipments(equipments: MachineMonitor[]) {
-    this._equipments.next(equipments)
+    const immutableEquipments = equipments.map(equipment => ({ ...equipment }));
+    this._equipments.next(immutableEquipments)
   }
 
   pieChartEquipmentData(pieChartEquipmentData: PieChartEquipmentData[]) {
-    this._pieChartEquipmentData.next(pieChartEquipmentData);
+    const immutablePieChartData = pieChartEquipmentData.map(data => ({ ...data }));
+    this._pieChartEquipmentData.next(immutablePieChartData);
   }
 
   constructor() { }

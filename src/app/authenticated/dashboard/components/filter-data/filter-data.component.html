@@ -10,7 +10,7 @@
             <mat-form-field>
                 <mat-date-range-input [rangePicker]="picker">
                     <input name="selectDate" matStartDate placeholder="Data Inicial" [(ngModel)]="startDate">
-                    <input name="selectDate" matEndDate placeholder="Data Final" [(ngModel)]="endDate">
+                    <input name="selectDate" matEndDate placeholder="Data Final" [(ngModel)]="endDate" (ngModelChange)="emitDateFilter()">
                 </mat-date-range-input>
                 <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-date-range-picker #picker></mat-date-range-picker>

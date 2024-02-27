@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Output, ViewChild } from '@angular/core';
 import { MatAccordion, MatExpansionModule } from '@angular/material/expansion';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatInputModule } from '@angular/material/input';
@@ -25,5 +25,12 @@ export class FilterDataComponent {
 
   public startDate!: Date;
   public endDate!: Date;
+
+
+  @Output() public filterDateSelected = new EventEmitter<any>();
+
+  emitDateFilter(){
+    this.filterDateSelected.emit({startDate: this.startDate, endDate:this.endDate})
+  }
 
 }

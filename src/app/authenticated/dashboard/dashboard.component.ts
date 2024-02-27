@@ -7,7 +7,7 @@ import { FilterDataComponent } from './components/filter-data/filter-data.compon
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [DataTableComponent, PieChartComponent, LineChartComponent, FilterDataComponent],
+  imports: [DataTableComponent, PieChartComponent, LineChartComponent],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss'
 })
