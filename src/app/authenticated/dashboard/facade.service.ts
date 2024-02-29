@@ -13,6 +13,8 @@ export class FacadeService {
 
   constructor(private api: EquipmentsService, private state: EquipmentsState) { }
 
+  private latestStates: Map<number, any> = new Map<number, any>();
+  
   equipments$ = this.state.equipments$;
 
   public stateData: EquipmentState[] = [];
@@ -56,10 +58,20 @@ export class FacadeService {
   }
 
   getLatestState(states: any) {
-    const latestState = states.equipmentsStatesHistory.states.sort((a: any, b: any) => new Date(b.date).getTime() - new Date(a.date).getTime())[0];
-    const lastDate = latestState.date;
+    const equipmentId = states.id;
+    // Verificar se o estado mais recente está em cache
+    if (this.latestStates.has(equipmentId)) {
+      return this.latestStates.get(equipmentId);
+    }
+    // Se não estiver em cache, calcular o estado mais recente
+    const latestState = states.equipmentsStatesHistory.states.reduce((prev: any, current: any) => {
+      return (new Date(current.date).getTime() > new Date(prev.date).getTime()) ? current : prev;
+    });
+    // Estilizar o estado
     const state = this.styleState(latestState.equipmentStateId);
-    return { lastDate, state }
+    // Armazenar o estado mais recente em cache
+    this.latestStates.set(equipmentId, { lastDate: latestState.date, state: state });
+    return { lastDate: latestState.date, state: state };
   }
 
   styleState(state: any) {

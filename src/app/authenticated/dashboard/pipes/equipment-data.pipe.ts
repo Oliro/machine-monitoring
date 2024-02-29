@@ -4,9 +4,8 @@ import { EquipmentData } from '../../../models/equipment-data';
 
 @Pipe({
   name: 'equipmentData',
-  standalone: true, 
-  //pure Foi setado false 'impuro', para evitar que o objeto equipments ivertesse e alterasse a logica
-  pure: false,
+  standalone: true,
+
 })
 export class EquipmentDataPipe implements PipeTransform {
 
@@ -15,99 +14,107 @@ export class EquipmentDataPipe implements PipeTransform {
     if (!equipments) {
       return [];
     }
+    //debugger
+    //const startDate = new Date('Wed Feb 25 2021 00:00:00 GMT-0300 (Horário Padrão de Brasília)');
+    //const endDate = new Date('Wed Feb 25 2021 00:00:00 GMT-0300 (Horário Padrão de Brasília)');
+    const startDate = new Date(filter.startDate);
 
-    let selectedDate = '2021-02-21';
-    if(filter.startDate > 0){
-      selectedDate = this.filterDataByDateRange(filter).formattedStartDate
-    }
-    
+    const endDate = new Date(filter.endDate);
+    endDate.setUTCHours(23, 59, 59, 999);
+
+    // Convertendo as datas para UTC
+    const startDateUTC = new Date(startDate).getTime();
+    const endDateUTC = new Date(endDate).getTime();
 
     let equipmentData: EquipmentData[] = [];
 
-    equipments.map((equipment) => {
-  
-      let previousDate: any = null;
-      let getlastStatePreviousDay = 0;
+    equipments.forEach((equipment) => {
+
+      console.log(equipment.id, '-init')
+
+      let firstOrLastState = false;
 
       let equipmentSumtHours = { operando: 0, manutencao: 0, parado: 0 };
 
-      equipment.equipmentsStatesHistory.states.forEach((state) => {
+      let nextStateDateUTC = 0;
 
-        const isDateSelected = state.date.startsWith(selectedDate);
-        const isDatePreviousDay = state.date.startsWith(this.getPreviousDay(selectedDate));
+      equipment.equipmentsStatesHistory.states.forEach((state, index, statesArray) => {
 
-        if (!(isDateSelected || isDatePreviousDay)) return;
+        // Acessa o próximo estado se ele existir de ative o calculo para o primeiro estado
+        if (index < statesArray.length - 1 && nextStateDateUTC == 0) {
+          const nextDate = new Date(statesArray[index + 1].date).getTime();
+          if (nextDate >= startDateUTC) {
+            firstOrLastState = true;
+          }
+        }
 
-        const stateData = equipment.stateData.find(data => data.id === state.equipmentStateId);
+        let currentStateDateUTC = new Date(state.date).getTime();
 
-        //horas estado anterior para encontrar a diferença
-        let startState = new Date(state.date).getTime();
-        //horas estado atual para encontrar a diferença
-        let endState = new Date(previousDate).getTime();
+        //Pare se data não corresponde ao filtro ou não for o primeiro ou ultimo estado para calculo
+        if (!((currentStateDateUTC >= startDateUTC && currentStateDateUTC <= endDateUTC) || firstOrLastState)) return;
 
-        if (!state.date.startsWith(selectedDate) && getlastStatePreviousDay === 0) {
-          // Definir o início do dia anterior para encontrar a diferença caso a data não seja atual
-          let newStartState = new Date(endState);
+        // Cria uma data nova com a proxima data, porém com 00:00:00 horas, para o calculo do primeiro status.
+        if (nextStateDateUTC === 0) {
+          let nextStateDate = new Date(statesArray[index + 1].date);
+          currentStateDateUTC = nextStateDate.getTime();
+          let newStartState = new Date(statesArray[index + 1].date);
           newStartState.setUTCHours(0, 0, 0, 0);
-
-          // Atualizar o estado inicial
-          startState = newStartState.getTime();
-
-          // Atualizar o sinalizador para indicar que o estado do último dia foi obtido
-          getlastStatePreviousDay = 1;
+          nextStateDateUTC = newStartState.getTime();
+          firstOrLastState = false;
         }
 
-        if (endState == 0) {
-          // Definir o final do dia como estado posterior, caso a data não seja atual
-          let newEndState = new Date(startState);
-          newEndState.setUTCHours(23, 59, 59, 999);
-
-          // Obter o valor de data final em milissegundos
-          endState = newEndState.getTime();
+        const nextDate = new Date(statesArray[index + 1].date).getTime();
+        //Cria uma data nova com a data atual, porém com o ultipo periodo do dia 23:59:59
+        if (endDateUTC < nextDate) {
+          let endStateDate = new Date(state.date);
+          endStateDate.setUTCHours(23, 59, 59, 999);
+          nextStateDateUTC = endStateDate.getTime();
         }
 
-        // Calcular a diferença em milissegundos
-        const diffMs = Math.abs(endState - startState);
-        // Converter a diferença de milissegundos para horas
-        const diffHoras = diffMs / (1000 * 60 * 60);
+        //Calcular a diferença em milissegundos
+        const diffMs = Math.abs(nextStateDateUTC - currentStateDateUTC);
+        //Converter a diferença de milissegundos para horas
+        const currentStatusSumtHours = diffMs / (1000 * 60 * 60);
 
-        if (state.date.startsWith(selectedDate) || getlastStatePreviousDay === 1) {
+        let equipmentStateCurrentDate = equipment.stateData.find(data => data.id === state.equipmentStateId)?.name;
 
-          switch (stateData?.name) {
-            case equipment.stateData[0].name:
-              equipmentSumtHours.operando += Math.ceil(diffHoras)
-              break;
-            case equipment.stateData[1].name:
-              equipmentSumtHours.parado += Math.ceil(diffHoras)
-              break;
-            case equipment.stateData[2].name:
-              equipmentSumtHours.manutencao += Math.ceil(diffHoras)
-              break;
-          }
-
-          if (getlastStatePreviousDay === 1) {
-            getlastStatePreviousDay = 2;
-          }
-
+        switch (equipmentStateCurrentDate) {
+          case equipment.stateData[0].name:
+            equipmentSumtHours.operando += Math.ceil(currentStatusSumtHours)
+            break;
+          case equipment.stateData[1].name:
+            equipmentSumtHours.parado += Math.ceil(currentStatusSumtHours)
+            break;
+          case equipment.stateData[2].name:
+            equipmentSumtHours.manutencao += Math.ceil(currentStatusSumtHours)
+            break;
         }
-        previousDate = state.date
+
+        nextStateDateUTC = new Date(statesArray[index + 2].date).getTime();
+
       })
 
       const gainEquipement = this.calculateGainEquipment(equipment, equipmentSumtHours);
 
+      console.log(
+        equipment.id, '---',
+        equipmentSumtHours.operando + 'operando', '-', equipmentSumtHours.manutencao + 'manutencao', '-', equipmentSumtHours.parado + 'parado', '-',
+        equipmentSumtHours.operando + equipmentSumtHours.manutencao + equipmentSumtHours.parado, '---', gainEquipement
+      )
+
       let _equipmentData: EquipmentData = {
         ...equipment,
-        equipmentSumtHours: equipmentSumtHours,
+        equipmentSumtHours: { ...equipmentSumtHours },
         gainEquipement: gainEquipement
       }
 
       equipmentData.push(_equipmentData);
+    })
 
-    });
-
-    //console.log(equipmentData)
     return equipmentData;
+
   }
+
 
   calculateGainEquipment(equipment: MachineMonitor, equipmentSumtHours: any) {
 
@@ -137,30 +144,6 @@ export class EquipmentDataPipe implements PipeTransform {
 
     return _gainEquipement;
 
-  }
-
-  getPreviousDay(data: string) {
-    const currentDate = new Date(data);
-    const oneDay = 24 * 60 * 60 * 1000; // em milissegundos
-    const prevDate = new Date(currentDate.getTime() - oneDay);
-    return prevDate.toISOString().split('T')[0];
-  }
-
-  filterDataByDateRange(filter: any) {
-    let startDate = new Date(filter.startDate);
-    let formattedStartDate = this.formatDate(startDate);
-
-    let endDate = new Date(filter.endDate);
-    let formattedEndDate = this.formatDate(endDate);
-
-    return {formattedStartDate, formattedEndDate}
-  }
-
-  formatDate(date: Date): string {
-    let year = date.getFullYear();
-    let month = ('0' + (date.getMonth() + 1)).slice(-2);
-    let day = ('0' + date.getDate()).slice(-2);
-    return `${year}-${month}-${day}`;
   }
 
 }
