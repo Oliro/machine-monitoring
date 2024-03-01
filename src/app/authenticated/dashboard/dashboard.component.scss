@@ -1,9 +1,5 @@
 .container-flex {
-  //   display: flex;
-  //   flex-wrap: wrap;
-  //   justify-content: space-around;
-  //   align-items: center;
-  //   gap: 1rem;
+
 }
 
 .container-flex__bar {
@@ -27,21 +23,21 @@
 }
 
 hr {
-  height: 0.01rem; 
+  height: 0.01rem;
   border: none;
-  background-color: #5F5DA6;
-  margin: 10px 0; 
+  background-color: #5f5da6;
+  margin: 10px 0;
 }
 
 .container-flex__details {
-  color: #7E8586;
+  color: #7e8586;
   padding: 2rem 0 0rem 0;
   width: 100%;
 }
 
 .container-flex__details__title {
-  background-color: #E8ECEC;
-  padding: 0.5rem 0 0.5rem 1.5rem;
+  background-color: #e8ecec;
+  padding: 1rem 0 1rem 1.5rem;
   border: 1px #dfd9d9 solid;
   display: flex;
   align-items: center;
@@ -49,7 +45,56 @@ hr {
 
 .icon__details {
   margin-right: 0.4rem;
-  color: #3B729D;
+  color: #3b729d;
   font-size: 1.5rem;
 }
 
+.container-flex__graphics {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: space-around;
+  background-color: #F2F4F4;
+}
+
+.graphics {
+  background-color: #fff;
+  margin: 1rem 0.3rem;
+  padding: 1rem;
+  width: 100%;     
+}
+
+/* Estilos para smartphones em modo retrato (portrait) */
+@media (max-width: 576px) {
+  .graphics {
+    width: 100%;
+  }
+}
+
+/* Estilos para smartphones em modo paisagem (landscape) */
+@media (min-width: 576px) and (max-width: 768px) {
+  .graphics {
+    width: 100%;
+  }
+}
+
+/* Estilos para tablets (iPad, Android) */
+@media (min-width: 768px) and (max-width: 992px) {
+  .graphics {
+    flex-basis: 45%;
+  }
+}
+
+/* Estilos para laptops e desktops */
+@media (min-width: 992px) and (max-width: 1200px) {
+  .graphics {
+    width: 30%;
+  }
+}
+
+/* Estilos para desktops maiores */
+@media (min-width: 1200px) {
+.graphics {
+  width: 30%;
+}
+}

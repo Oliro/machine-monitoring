@@ -1,24 +1,25 @@
 <button type="button" class="filter--btn" (click)="mep.expanded = !mep.expanded">
     <i class="material-icons">filter_alt</i> Filtro
 </button>
+
 <div class="filter">
     <mat-expansion-panel #mep="matExpansionPanel">
-        <h5>Aplicar Filtro</h5>
-        <div class="filter__form">
-
-            <label for="selectDate">Selecione a data</label>
-            <mat-form-field>
-                <mat-date-range-input [rangePicker]="picker">
-                    <input name="selectDate" matStartDate placeholder="Data Inicial" [(ngModel)]="startDate">
-                    <input name="selectDate" matEndDate placeholder="Data Final" [(ngModel)]="endDate" (ngModelChange)="emitDateFilter()">
-                </mat-date-range-input>
-                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-                <mat-date-range-picker #picker></mat-date-range-picker>
-            </mat-form-field>
-
-            <br>
-            <input type="submit" value="Limpar Filtro">
+        <div class="filter-container">
+            <span class="filter-container--title">Aplicar Filtro</span>
+            <div class="filter__form">
+                <label for="selectDate">Selecione a data</label>
+                <mat-form-field>
+                    <mat-date-range-input [rangePicker]="picker">
+                        <input name="selectDate" matStartDate placeholder="Data Inicial" [(ngModel)]="startDate">
+                        <input name="selectDate" matEndDate placeholder="Data Final" [(ngModel)]="endDate" (ngModelChange)="emitDateFilter()">
+                    </mat-date-range-input>
+                    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-date-range-picker #picker></mat-date-range-picker>
+                </mat-form-field>
+    
+                <br>
+                <button type="button" class="clear--btn" (click)="resetFilter()">Limpar Filtro</button>
+            </div>
         </div>
-
     </mat-expansion-panel>
 </div>

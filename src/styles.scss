@@ -43,4 +43,8 @@ $machine-monitoring-theme: mat.define-light-theme((
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
-
+/*Remover margim do mat-expansion-panel */
+.mat-expansion-panel-body {
+  margin: 0 !important;
+  padding: 0 !important;
+}

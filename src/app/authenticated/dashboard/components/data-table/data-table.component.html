@@ -1,7 +1,6 @@
-<div>
-  <app-filter-data (filterDateSelected)="filterDateSelected($event)"></app-filter-data>
 
-</div>
+<app-filter-data (filterDateSelected)="filterDateSelected($event)"></app-filter-data>
+
 <div class="container-table">
   <table>
     <thead>
@@ -28,7 +27,7 @@
           </span>
         </td>
         <td>{{ facade.getLatestState(item).lastDate | date : 'dd/MM/yyyy HH:mm' }}</td>
-        <td></td>
+        <td>{{ filter.startDate | date : 'dd/MM/yyyy'}} á {{filter.endDate | date : 'dd/MM/yyyy' }}</td>
         <td>
           <span class="badge-performance"
             [ngStyle]="{'background-color': facade.getPerformanceColorType(item.equipmentSumtHours.operando)}">

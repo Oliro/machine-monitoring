@@ -30,11 +30,9 @@ export class LineChartComponent implements OnInit {
   }
 
   chartOptions() {
-
     const seriesData = this.chartEquipmentData.map(item => ({
       data: item.earnings.gainEquipmentByState
     }));
-
     this.options = {
       title: {
         left: '50%',
@@ -50,7 +48,7 @@ export class LineChartComponent implements OnInit {
       },
       xAxis: {
         type: 'category',
-        data: this.chartEquipmentData.map((item) => item.title),
+        data: seriesData[0]?.data || [],
         splitLine: {
           show: true,
         },

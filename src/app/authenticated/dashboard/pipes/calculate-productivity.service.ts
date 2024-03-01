@@ -2,21 +2,19 @@ import { Injectable } from '@angular/core';
 
 import { MachineMonitor } from '../../../models/machine-monitor';
 import { EquipmentData } from '../../../models/equipment-data';
+import { FacadeService } from '../facade.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CalculateProductivityService {
 
+  constructor(public facade: FacadeService){}
+
   calculateProductivity(equipments: MachineMonitor[], filter: any): EquipmentData[] {
 
-    let startDate = new Date('Wed Feb 25 2021 00:00:00 GMT-0300 (Horário Padrão de Brasília)');
-    let endDate = new Date('Wed Feb 25 2021 00:00:00 GMT-0300 (Horário Padrão de Brasília)');
-    
-    if(filter.startDate > 0){
-      startDate = new Date(filter.startDate);
-      endDate = new Date(filter.endDate);
-    }
+    let startDate = new Date(filter.startDate);
+    let endDate = new Date(filter.endDate);
 
     endDate.setUTCHours(23, 59, 59, 999);
     // Convertendo as datas para UTC
@@ -100,8 +98,13 @@ export class CalculateProductivityService {
         equipmentSumtHours: { ...equipmentSumtHours },
         gainEquipment: {gainEquipmentByState, gainEquipmentTotal}
       }
+      
       equipmentData.push(_equipmentData);
+
+      this.facade.createPieChartEquipmentData(_equipmentData);
+
     })
+   
 
     return equipmentData;
   }

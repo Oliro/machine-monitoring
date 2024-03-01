@@ -1,6 +1,6 @@
 .filter {
   border-radius: 5px;
-  background-color: #f2f2f2;
+  margin-bottom: 0.5rem;
 }
 
 .filter--btn {
@@ -19,11 +19,41 @@
   background-color: RoyalBlue;
 }
 
-.filter__form {
+.clear--btn {
+  display: flex;
+  align-items: center;
+  background-color: #ffc107;
+  border: solid #ffc720 1px;
+  color: 000;
+  padding: 5px 15px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.clear--btn:hover {
+  background-color: #ffca2c;
+}
+
+.filter-container {
+  background-color: #F8F9FB;
+ border: solid 1px #C7C8CA
+}
+
+.filter-container--title {
+  font-size: 1.2rem;
+  display: block;
+  background-color: #F1F2F4; 
   padding: 1rem;
+  border-bottom: solid 1px #C7C8CA;
+}
+
+.filter__form {
+  padding: 0.8rem;
 }
 
 .filter__form label {
   display: block;
 }
+
 

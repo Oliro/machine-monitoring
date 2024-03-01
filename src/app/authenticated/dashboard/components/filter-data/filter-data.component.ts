@@ -30,4 +30,9 @@ export class FilterDataComponent {
     this.filterDateSelected.emit({startDate: this.startDate, endDate:this.endDate})
   }
 
+  resetFilter() {
+    this.startDate = new Date('');
+    this.endDate = new Date('');
+  }
+
 }
