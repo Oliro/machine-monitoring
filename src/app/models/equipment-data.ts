@@ -12,5 +12,10 @@ export interface EquipmentData {
     equipmentsStatesHistory: EquipmentStateHistory;
     stateData: EquipmentState[];
     equipmentSumtHours: any;
-    gainEquipement: any;
+    gainEquipment: GainEquipment;
+}
+
+export interface GainEquipment {
+    gainEquipmentByState: number[]; 
+    gainEquipmentTotal: number; 
 }

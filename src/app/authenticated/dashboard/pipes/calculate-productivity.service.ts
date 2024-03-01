@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { EquipmentDataPipe } from './equipment-data.pipe';
+
 import { MachineMonitor } from '../../../models/machine-monitor';
 import { EquipmentData } from '../../../models/equipment-data';
 
@@ -10,11 +10,13 @@ export class CalculateProductivityService {
 
   calculateProductivity(equipments: MachineMonitor[], filter: any): EquipmentData[] {
 
-    //const startDate = new Date('Wed Feb 25 2021 00:00:00 GMT-0300 (Horário Padrão de Brasília)');
-    //const endDate = new Date('Wed Feb 25 2021 00:00:00 GMT-0300 (Horário Padrão de Brasília)');
-    const startDate = new Date(filter.startDate);
-
-    const endDate = new Date(filter.endDate);
+    let startDate = new Date('Wed Feb 25 2021 00:00:00 GMT-0300 (Horário Padrão de Brasília)');
+    let endDate = new Date('Wed Feb 25 2021 00:00:00 GMT-0300 (Horário Padrão de Brasília)');
+    
+    if(filter.startDate > 0){
+      startDate = new Date(filter.startDate);
+      endDate = new Date(filter.endDate);
+    }
 
     endDate.setUTCHours(23, 59, 59, 999);
     // Convertendo as datas para UTC
@@ -30,6 +32,9 @@ export class CalculateProductivityService {
       let equipmentSumtHours = { operando: 0, manutencao: 0, parado: 0 };
 
       let nextStateDateUTC = 0;
+
+      let gainEquipmentTotal: number = 0;
+      let gainEquipmentByState: number[]= [];
 
       equipment.equipmentsStatesHistory.states.forEach((state, index, statesArray) => {
 
@@ -85,16 +90,16 @@ export class CalculateProductivityService {
 
         nextStateDateUTC = new Date(statesArray[index + 2].date).getTime();
 
+        gainEquipmentTotal = this.calculateGainEquipment(equipment, equipmentSumtHours);
+        gainEquipmentByState.push(this.calculateGainEquipment(equipment, equipmentSumtHours));
       })
 
-      const gainEquipement = this.calculateGainEquipment(equipment, equipmentSumtHours);
-
+      
       let _equipmentData: EquipmentData = {
         ...equipment,
         equipmentSumtHours: { ...equipmentSumtHours },
-        gainEquipement: gainEquipement
+        gainEquipment: {gainEquipmentByState, gainEquipmentTotal}
       }
-
       equipmentData.push(_equipmentData);
     })
 
@@ -123,12 +128,12 @@ export class CalculateProductivityService {
       }
     });
 
-    const _gainEquipement =
+    const _gainEquipment =
       (equipmentSumtHours.operando * equipmentModelEarnings.operando) +
       (equipmentSumtHours.manutencao * equipmentModelEarnings.manutencao) +
       (equipmentSumtHours.parado * equipmentModelEarnings.parado);
 
-    return _gainEquipement;
+    return _gainEquipment;
 
   }
 

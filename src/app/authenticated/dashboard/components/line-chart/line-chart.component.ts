@@ -1,7 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import type { EChartsOption } from 'echarts';
+import { Component, OnInit } from '@angular/core';
+
 import { NgxEchartsDirective, provideEcharts } from 'ngx-echarts';
+
+import { EquipmentsState } from '../../../../services/states/equipments.state';
+import { chartEquipmentData } from '../../../../models/chart-equipment-data';
 
 @Component({
   selector: 'app-line-chart',
@@ -12,28 +15,28 @@ import { NgxEchartsDirective, provideEcharts } from 'ngx-echarts';
   providers: [provideEcharts()],
 })
 export class LineChartComponent implements OnInit {
-  options!: any;
-  private data!: any;
+
+  public chartEquipmentData: chartEquipmentData[] = [];
+
+  public options: any = {}
+
+  constructor(private state: EquipmentsState) { }
 
   ngOnInit(): void {
-    this.data = [
-      { name: '01/02/2021', value: 500, color: '#ccffcc' },
-      { name: '02/02/2021', value: 300, color: '#aaffcc' },
-      { name: '03/02/2021', value: 900, color: '#ccffaa' },
-      { name: '04/02/2021', value: 500, color: '#ccffcc' },
-      { name: '05/02/2021', value: 300, color: '#aaffcc' },
-      { name: '06/02/2021', value: 900, color: '#ccffaa' },
-      { name: '01/02/2021', value: 500, color: '#ccffcc' },
-      { name: '02/02/2021', value: 300, color: '#aaffcc' },
-      { name: '03/02/2021', value: 900, color: '#ccffaa' },
-      { name: '04/02/2021', value: 500, color: '#ccffcc' },
-      { name: '05/02/2021', value: 300, color: '#aaffcc' },
-      { name: '06/02/2021', value: 900, color: '#ccffaa' },
-    ];
+    this.state.chartEquipmentData$.subscribe((result) => {
+      this.chartEquipmentData = result;
+      this.chartOptions();
+    });
+  }
 
-    // initialize chart options:
+  chartOptions() {
+
+    const seriesData = this.chartEquipmentData.map(item => ({
+      data: item.earnings.gainEquipmentByState
+    }));
+
     this.options = {
-        title: {
+      title: {
         left: '50%',
         text: 'Ganho por equipamento',
         subtext: 'Por data',
@@ -47,7 +50,7 @@ export class LineChartComponent implements OnInit {
       },
       xAxis: {
         type: 'category',
-        data: this.data.map((item: any) => item.name),
+        data: this.chartEquipmentData.map((item) => item.title),
         splitLine: {
           show: true,
         },
@@ -61,7 +64,7 @@ export class LineChartComponent implements OnInit {
       series: [
         {
           name: 'Ganho',
-          data: this.data.map((item: any) => item.value),
+          data: seriesData[0]?.data || [],
           type: 'line',
           showSymbol: true,
           symbol: 'circle',

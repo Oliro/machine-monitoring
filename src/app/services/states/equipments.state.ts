@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { Equipment } from '../../models/equipment';
+
 import { MachineMonitor } from '../../models/machine-monitor';
-import { PieChartEquipmentData } from '../../models/pie-chart-equipment-data';
+import { chartEquipmentData } from '../../models/chart-equipment-data';
+
 
 @Injectable({
   providedIn: 'root'
@@ -10,19 +11,17 @@ import { PieChartEquipmentData } from '../../models/pie-chart-equipment-data';
 export class EquipmentsState {
 
   private _equipments = new BehaviorSubject<MachineMonitor[]>([]);
-  private _pieChartEquipmentData = new BehaviorSubject<PieChartEquipmentData[]>([]);
+  private _chartEquipmentData = new BehaviorSubject<chartEquipmentData[]>([]);
 
   equipments$ = this._equipments.asObservable();
-  pieChartEquipmentData$ = this._pieChartEquipmentData.asObservable();
+  chartEquipmentData$ = this._chartEquipmentData.asObservable();
 
   equipments(equipments: MachineMonitor[]) {
-    const immutableEquipments = equipments.map(equipment => ({ ...equipment }));
-    this._equipments.next(immutableEquipments)
+    this._equipments.next(equipments)
   }
 
-  pieChartEquipmentData(pieChartEquipmentData: PieChartEquipmentData[]) {
-    const immutablePieChartData = pieChartEquipmentData.map(data => ({ ...data }));
-    this._pieChartEquipmentData.next(immutablePieChartData);
+  pieChartEquipmentData(chartEquipmentData: chartEquipmentData[]) {
+    this._chartEquipmentData.next(chartEquipmentData);
   }
 
   constructor() { }

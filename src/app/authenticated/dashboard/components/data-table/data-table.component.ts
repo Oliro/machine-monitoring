@@ -3,6 +3,7 @@ import { FacadeService } from '../../facade.service';
 import { CommonModule } from '@angular/common';
 import { EquipmentDataPipe } from '../../pipes/equipment-data.pipe';
 import { FilterDataComponent } from '../filter-data/filter-data.component';
+import { EquipmentData } from '../../../../models/equipment-data';
 
 
 @Component({
@@ -22,8 +23,8 @@ export class DataTableComponent implements OnInit, AfterContentChecked  {
     this.facade.load();
   }
 
-  equipmentDatails(quipmentSumtHours: any) {
-    this.facade.createPieChartEquipmentData(quipmentSumtHours)
+  equipmentDatails(equipment: EquipmentData) {
+    this.facade.createPieChartEquipmentData(equipment)
   }
 
   filterDateSelected(datesFilter: any) {

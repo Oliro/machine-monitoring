@@ -1,4 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
+
 import { MachineMonitor } from '../../../models/machine-monitor';
 import { EquipmentData } from '../../../models/equipment-data';
 import { CalculateProductivityService } from './calculate-productivity.service';
@@ -21,7 +22,5 @@ export class EquipmentDataPipe implements PipeTransform {
     return this.calculateProductivity.calculateProductivity(equipments, filter);
 
   }
-
-
 
 }

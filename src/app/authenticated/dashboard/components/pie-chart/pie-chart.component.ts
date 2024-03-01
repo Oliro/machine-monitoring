@@ -1,9 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+
 import { NgxEchartsDirective, provideEcharts } from 'ngx-echarts';
-import type { EChartsOption } from 'echarts';
+
 import { EquipmentsState } from '../../../../services/states/equipments.state';
-import { PieChartEquipmentData } from '../../../../models/pie-chart-equipment-data';
+import { chartEquipmentData } from '../../../../models/chart-equipment-data';
+
 
 @Component({
   selector: 'app-pie-chart',
@@ -17,15 +19,15 @@ import { PieChartEquipmentData } from '../../../../models/pie-chart-equipment-da
 })
 export class PieChartComponent implements OnInit {
 
-  public pieChartEquipmentData: PieChartEquipmentData[] = [];
+  public chartEquipmentData: chartEquipmentData[] = [];
 
   public options: any = {}
 
   constructor(private state: EquipmentsState) { }
 
   ngOnInit(): void {
-    this.state.pieChartEquipmentData$.subscribe((result) => {
-      this.pieChartEquipmentData = result;
+    this.state.chartEquipmentData$.subscribe((result) => {
+      this.chartEquipmentData = result;
       this.chartOptions();
     });
   }
@@ -47,7 +49,7 @@ export class PieChartComponent implements OnInit {
       legend: {
         align: 'auto',
         bottom: 10,
-        data: this.pieChartEquipmentData.map((item) => item.title),
+        data: this.chartEquipmentData.map((item) => item.productivity.title),
       },
       calculable: true,
       series: [
@@ -55,10 +57,10 @@ export class PieChartComponent implements OnInit {
           name: 'Estado',
           type: 'pie',
           radius: [0, 110],
-          data: this.pieChartEquipmentData.map((item) => ({
-            value: item.value,
-            itemStyle: { color: item.color },
-            name: item.title,
+          data: this.chartEquipmentData.map((item) => ({
+            value: item.productivity.value,
+            itemStyle: { color: item.productivity.color },
+            name: item.productivity.title,
           })),
           emphasis: {
             itemStyle: {

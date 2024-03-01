@@ -20,7 +20,7 @@
       @for (item of facade.equipments$ | async | equipmentData:filter; track $index;) {
       <tr>
 
-        <td class="onclick-table" (click)="equipmentDatails(item.equipmentSumtHours)">{{item.name}}</td>
+        <td class="onclick-table" (click)="equipmentDatails(item)">{{item.name}}</td>
         <td>{{item.equipmentsModels.name}}</td>
         <td>
           <span class="badge" [ngStyle]="{'background-color': facade.getLatestState(item).state.color}">
@@ -35,7 +35,7 @@
             {{item.equipmentSumtHours.operando / 24 | percent }}
           </span>
         </td>
-        <td class="text-gain">{{item.gainEquipement}}</td>
+        <td class="text-gain">{{item.gainEquipment.gainEquipmentTotal}}</td>
         <td></td>
       </tr>
       }
