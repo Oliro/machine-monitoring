@@ -7,7 +7,8 @@
 
 export const environment = {
   production: false,
-  apiUrlv1: 'http://localhost:3000/'
+  apiUrlv1: 'http://localhost:3000/',
+  MAP_LAYER: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
 };
 
 

@@ -10,12 +10,13 @@ import {
 import { EquipmentState } from '../../models/equipment-state';
 import { chartEquipmentData } from '../../models/chart-equipment-data';
 import { EquipmentData } from '../../models/equipment-data';
+import { EquipmentPositionHistory } from '../../models/equipment-position-history';
 
 @Injectable({
   providedIn: 'root',
 })
 export class FacadeService {
-  constructor(private api: EquipmentsService, private state: EquipmentsState) {}
+  constructor(private api: EquipmentsService, private state: EquipmentsState) { }
 
   equipments$ = this.state.equipments$;
 
@@ -66,8 +67,8 @@ export class FacadeService {
   }
 
   getLatestState(states: EquipmentData) {
-    
-   const statesArray = [...states.equipmentsStatesHistory.states]
+
+    const statesArray = [...states.equipmentsStatesHistory.states]
 
     if (statesArray.length === 0) {
       return null;
@@ -91,7 +92,8 @@ export class FacadeService {
       case EnumEquipmentState.Parado:
         return { color: EnumEquipmentStateColor.Parado, name: 'Parado' };
       case EnumEquipmentState.Manutencao:
-        return {color: EnumEquipmentStateColor.Manutencao, name: 'Manutenção',
+        return {
+          color: EnumEquipmentStateColor.Manutencao, name: 'Manutenção',
         };
       default:
         return { color: '#ffffff', name: 'Desconhecido' };
@@ -111,21 +113,27 @@ export class FacadeService {
     const pieChartEquipmentData: chartEquipmentData[] = [
       {
         title: equipment.equipmentsModels.name,
-        productivity: { title: this.stateData[0].name, value:equipment.equipmentSumtHours.operando, color:this.stateData[0].color},
-        earnings: equipment.gainEquipment,
-      },
-      {
-        title: equipment.equipmentsModels.name ,
-        productivity: { title: this.stateData[1].name, value:equipment.equipmentSumtHours.parado, color: this.stateData[1].color},
+        productivity: { title: this.stateData[0].name, value: equipment.equipmentSumtHours.operando, color: this.stateData[0].color },
         earnings: equipment.gainEquipment,
       },
       {
         title: equipment.equipmentsModels.name,
-        productivity: {title:this.stateData[2].name, value:equipment.equipmentSumtHours.manutencao, color: this.stateData[2].color},
+        productivity: { title: this.stateData[1].name, value: equipment.equipmentSumtHours.parado, color: this.stateData[1].color },
+        earnings: equipment.gainEquipment,
+      },
+      {
+        title: equipment.equipmentsModels.name,
+        productivity: { title: this.stateData[2].name, value: equipment.equipmentSumtHours.manutencao, color: this.stateData[2].color },
         earnings: equipment.gainEquipment,
       },
     ];
 
     this.state.pieChartEquipmentData(pieChartEquipmentData);
   }
+
+  createPositonMapEquipmentData(equipmentsPositionHistory: EquipmentPositionHistory) {
+    this.state.positonMapEquipmentData(equipmentsPositionHistory);
+  }
+
 }
+

@@ -28,7 +28,8 @@ export class DataTableComponent implements OnInit  {
   }
 
   equipmentDatails(equipment: EquipmentData) {
-    this.facade.createPieChartEquipmentData(equipment)
+    this.facade.createPieChartEquipmentData(equipment);
+    this.facade.createPositonMapEquipmentData(equipment.equipmentsPositionHistory);
   }
 
   filterDateSelected(datesFilter: any) {

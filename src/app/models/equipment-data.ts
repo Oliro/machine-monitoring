@@ -8,7 +8,7 @@ export interface EquipmentData {
     equipmentModelId: string;
     name: string;
     equipmentsModels: EquipmentModel;
-    equipmentsPositionHistory: EquipmentPositionHistory[];
+    equipmentsPositionHistory: EquipmentPositionHistory;
     equipmentsStatesHistory: EquipmentStateHistory;
     stateData: EquipmentState[];
     equipmentSumtHours: any;

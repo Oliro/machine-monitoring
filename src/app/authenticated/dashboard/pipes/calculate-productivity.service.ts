@@ -93,7 +93,7 @@ export class CalculateProductivityService {
         
       })
       
-      let _equipmentData: EquipmentData = {
+      let _equipmentData: any = {
         ...equipment,
         equipmentSumtHours: { ...equipmentSumtHours },
         gainEquipment: {gainEquipmentByState, gainEquipmentTotal}
@@ -102,7 +102,8 @@ export class CalculateProductivityService {
       equipmentData.push(_equipmentData);
 
       this.facade.createPieChartEquipmentData(_equipmentData);
-
+      this.facade.createPositonMapEquipmentData(equipment.equipmentsPositionHistory as any)
+      
     })
    
     return equipmentData;
