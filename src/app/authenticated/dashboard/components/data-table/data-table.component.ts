@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef, AfterContentChecked } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { FacadeService } from '../../facade.service';
 import { CommonModule } from '@angular/common';
 import { EquipmentDataPipe } from '../../pipes/equipment-data.pipe';
@@ -13,11 +13,11 @@ import { EquipmentData } from '../../../../models/equipment-data';
   templateUrl: './data-table.component.html',
   styleUrl: './data-table.component.scss'
 })
-export class DataTableComponent implements OnInit, AfterContentChecked  {
+export class DataTableComponent implements OnInit  {
 
   public filter: any = [];
 
-  constructor(public facade: FacadeService, private changeDetector: ChangeDetectorRef) { }
+  constructor(public facade: FacadeService) { }
 
   ngOnInit(): void {
 
@@ -33,10 +33,6 @@ export class DataTableComponent implements OnInit, AfterContentChecked  {
 
   filterDateSelected(datesFilter: any) {
      this.filter = {...datesFilter}
-  }
-
-  ngAfterContentChecked(): void {
-    this.changeDetector.detectChanges();
   }
 
 }

@@ -20,19 +20,20 @@ import { FormsModule } from '@angular/forms';
 })
 export class FilterDataComponent {
 
+  public filter: any = [];
+
   public startDate!: Date;
   public endDate!: Date;
 
 
   @Output() public filterDateSelected = new EventEmitter<any>();
 
-  emitDateFilter(){
-    this.filterDateSelected.emit({startDate: this.startDate, endDate:this.endDate})
+  emitDateFilter() {
+    this.filterDateSelected.emit(this.filter)
   }
 
   resetFilter() {
-    this.startDate = new Date('');
-    this.endDate = new Date('');
+    this.filter = [];
   }
 
 }

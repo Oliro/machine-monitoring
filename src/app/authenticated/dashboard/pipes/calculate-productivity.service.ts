@@ -87,25 +87,24 @@ export class CalculateProductivityService {
         }
 
         nextStateDateUTC = new Date(statesArray[index + 2].date).getTime();
-
         gainEquipmentTotal = this.calculateGainEquipment(equipment, equipmentSumtHours);
         gainEquipmentByState.push(this.calculateGainEquipment(equipment, equipmentSumtHours));
-      })
 
+        
+      })
       
       let _equipmentData: EquipmentData = {
         ...equipment,
         equipmentSumtHours: { ...equipmentSumtHours },
         gainEquipment: {gainEquipmentByState, gainEquipmentTotal}
       }
-      
+
       equipmentData.push(_equipmentData);
 
       this.facade.createPieChartEquipmentData(_equipmentData);
 
     })
    
-
     return equipmentData;
   }
 

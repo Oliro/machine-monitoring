@@ -17,8 +17,6 @@ import { EquipmentData } from '../../models/equipment-data';
 export class FacadeService {
   constructor(private api: EquipmentsService, private state: EquipmentsState) {}
 
-  private latestStates: Map<number, any> = new Map<number, any>();
-
   equipments$ = this.state.equipments$;
 
   public stateData: EquipmentState[] = [];
@@ -67,28 +65,23 @@ export class FacadeService {
       });
   }
 
-  getLatestState(states: any) {
-    const equipmentId = states.id;
-    // Verificar se o estado mais recente está em cache
-    if (this.latestStates.has(equipmentId)) {
-      return this.latestStates.get(equipmentId);
+  getLatestState(states: EquipmentData) {
+    
+   const statesArray = [...states.equipmentsStatesHistory.states]
+
+    if (statesArray.length === 0) {
+      return null;
     }
-    // Se não estiver em cache, calcular o estado mais recente
-    const latestState = states.equipmentsStatesHistory.states.reduce(
-      (prev: any, current: any) => {
-        return new Date(current.date).getTime() > new Date(prev.date).getTime()
-          ? current
-          : prev;
-      }
-    );
-    // Estilizar o estado
-    const state = this.styleState(latestState.equipmentStateId);
-    // Armazenar o estado mais recente em cache
-    this.latestStates.set(equipmentId, {
-      lastDate: latestState.date,
-      state: state,
+
+    const sortedStates = statesArray.sort((a: any, b: any) => {
+      return new Date(b.date).getTime() - new Date(a.date).getTime();
     });
-    return { lastDate: latestState.date, state: state };
+
+    const state = this.styleState(sortedStates[0].equipmentStateId);
+    const latestState = sortedStates[0].date;
+
+
+    return { lastDate: latestState, state: state };
   }
 
   styleState(state: any) {
@@ -98,9 +91,7 @@ export class FacadeService {
       case EnumEquipmentState.Parado:
         return { color: EnumEquipmentStateColor.Parado, name: 'Parado' };
       case EnumEquipmentState.Manutencao:
-        return {
-          color: EnumEquipmentStateColor.Manutencao,
-          name: 'Manutenção',
+        return {color: EnumEquipmentStateColor.Manutencao, name: 'Manutenção',
         };
       default:
         return { color: '#ffffff', name: 'Desconhecido' };

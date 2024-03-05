@@ -1,4 +1,3 @@
-
 <app-filter-data (filterDateSelected)="filterDateSelected($event)"></app-filter-data>
 
 <div class="container-table">
@@ -7,7 +6,7 @@
       <tr>
         <th>Nome</th>
         <th>Modelo</th>
-        <th>Estado</th>
+        <th>Status</th>
         <th>Último Sinal</th>
         <th>Data</th>
         <th>Produtividade</th>
@@ -22,11 +21,11 @@
         <td class="onclick-table" (click)="equipmentDatails(item)">{{item.name}}</td>
         <td>{{item.equipmentsModels.name}}</td>
         <td>
-          <span class="badge" [ngStyle]="{'background-color': facade.getLatestState(item).state.color}">
-            {{ facade.getLatestState(item).state.name }}
+          <span class="badge" [ngStyle]="{'background-color': facade.getLatestState(item)?.state?.color}">
+            {{ facade.getLatestState(item)?.state?.name }}
           </span>
         </td>
-        <td>{{ facade.getLatestState(item).lastDate | date : 'dd/MM/yyyy HH:mm' }}</td>
+        <td>{{ facade.getLatestState(item)?.lastDate| date : 'dd/MM/yyyy HH:mm' }}</td>
         <td>{{ filter.startDate | date : 'dd/MM/yyyy'}} á {{filter.endDate | date : 'dd/MM/yyyy' }}</td>
         <td>
           <span class="badge-performance"
