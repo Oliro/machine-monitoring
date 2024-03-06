@@ -102,8 +102,7 @@ export class CalculateProductivityService {
       equipmentData.push(_equipmentData);
 
       this.facade.createPieChartEquipmentData(_equipmentData);
-      this.facade.createPositonMapEquipmentData(equipment.equipmentsPositionHistory as any)
-      
+
     })
    
     return equipmentData;
