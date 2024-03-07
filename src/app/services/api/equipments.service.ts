@@ -16,23 +16,23 @@ export class EquipmentsService extends BaseService {
   constructor(private http: HttpClient) { super(); }
 
   getEquipments(): Observable<Equipment[]> {
-    return this.http.get<Equipment[]>(this.urlServiceV1 + 'equipments')
+    return this.http.get<Equipment[]>(this.urlServiceV1)
   }
 
   getEquipmentsModels(): Observable<EquipmentModel[]> {
-    return this.http.get<EquipmentModel[]>(this.urlServiceV1 + 'equipmentsModels')
+    return this.http.get<EquipmentModel[]>(this.urlServiceV1)
   }
 
   getEquipmentsPositionHistory(): Observable<EquipmentPositionHistory[]> {
-    return this.http.get<EquipmentPositionHistory[]>(this.urlServiceV1 + 'equipmentsPositionHistory')
+    return this.http.get<EquipmentPositionHistory[]>(this.urlServiceV1)
   }
 
   getEquipmentsStatesHistory(): Observable<EquipmentStateHistory[]> {
-    return this.http.get<EquipmentStateHistory[]>(this.urlServiceV1 + 'equipmentsStatesHistory')
+    return this.http.get<EquipmentStateHistory[]>(this.urlServiceV1)
   }
 
   getEquipmentsStates(): Observable<EquipmentState[]> {
-    return this.http.get<EquipmentState[]>(this.urlServiceV1 + 'equipmentsStates')
+    return this.http.get<EquipmentState[]>(this.urlServiceV1)
   }
 
 }
