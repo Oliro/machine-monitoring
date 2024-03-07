@@ -112,17 +112,20 @@ export class FacadeService {
   createPieChartEquipmentData(equipment: EquipmentData) {
     const pieChartEquipmentData: chartEquipmentData[] = [
       {
-        title: equipment.equipmentsModels.name,
+        title: equipment.name,
+        model: equipment.equipmentsModels.name,
         productivity: { title: this.stateData[0].name, value: equipment.equipmentSumtHours.operando, color: this.stateData[0].color },
         earnings: equipment.gainEquipment,
       },
       {
-        title: equipment.equipmentsModels.name,
+        title: equipment.name,
+        model: equipment.equipmentsModels.name,
         productivity: { title: this.stateData[1].name, value: equipment.equipmentSumtHours.parado, color: this.stateData[1].color },
         earnings: equipment.gainEquipment,
       },
       {
-        title: equipment.equipmentsModels.name,
+        title: equipment.name,
+        model: equipment.equipmentsModels.name,
         productivity: { title: this.stateData[2].name, value: equipment.equipmentSumtHours.manutencao, color: this.stateData[2].color },
         earnings: equipment.gainEquipment,
       },
