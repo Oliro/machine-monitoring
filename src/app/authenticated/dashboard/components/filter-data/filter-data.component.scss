@@ -6,9 +6,9 @@
 .filter--btn {
   display: flex;
   align-items: center;
-  background-color: DodgerBlue;
-  border: none;
-  color: white;
+  background-color: var(--btn-filter);
+  border: solid 1px #17936A;
+  color: #093B29;
   padding: 5px 15px;
   font-size: 16px;
   border-radius: 5px;
@@ -16,7 +16,7 @@
 }
 
 .filter--btn:hover {
-  background-color: RoyalBlue;
+  background-color: var(--btn-filter-houver);
 }
 
 .clear-btn {

@@ -35,9 +35,13 @@ $machine-monitoring-theme: mat.define-light-theme((
 
 /* You can add global styles to this file, and also import other style files */
 :root {
-  --header-bgcolor: #404256;
-  --main-bgcolor: #282A42;
-  --footer-bgcolor: #404256;
+  --header-bgcolor: #0073A4;
+  --main-bgcolor: #86C19E;
+  --footer-bgcolor: #174031;
+  --table-header-bg: #0073A4;
+  --table-header-border: #005E86;
+  --btn-filter: #1DB080;
+  --btn-filter-houver: #21CD94;
 }
 
 html, body { height: 100%; }

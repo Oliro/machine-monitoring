@@ -56,7 +56,7 @@ export class MapEquipmentComponent implements OnInit, OnDestroy {
       fillColor: '#3EED4A',
       fillOpacity: 0.5,
       weight: 1,
-      radius: 10500
+      radius: 25500
     });
 
     const polygon = L.polyline(
