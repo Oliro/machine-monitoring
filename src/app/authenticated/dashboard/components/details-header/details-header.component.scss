@@ -1,5 +1,13 @@
-.header-detail-equipments{
-    margin-left: 0.5rem;
-    font-weight: 500;
-    color: #0073A4;
+.header-detail-equipments {
+  display: block;
+  margin-left: 0.5rem;
+  font-weight: 500;
+  color: #0073a4;
+}
+
+/* Estilos para desktops maiores */
+@media (min-width: 768px) {
+  .header-detail-equipments {
+    display:inline;
+  }
 }

@@ -103,10 +103,10 @@ export class FacadeService {
   getPerformanceColorType(value: number): string {
     value = (value / 24) * 100; //percent for 24 hours
     if (value > 60) {
-      return '#2ecc71';
+      return '#41C90A';
     } else if (value > 30) {
-      return '#f1c40f';
-    } else return '#e74c3c';
+      return '#8EE000';
+    } else return '#C5C90A';
   }
 
   createPieChartEquipmentData(equipment: EquipmentData) {

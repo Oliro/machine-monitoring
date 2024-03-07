@@ -3,19 +3,23 @@
 }
 
 .container-flex__bar {
-  color: #fff;
-  padding: 2rem 0 2rem 0;
+  color: #7e8586;
+  padding: 1rem 0 1rem 0;
   width: 100%;
 }
 
 .container-flex__bar__title {
   display: flex;
+  background-color: #e8ecec;
+  padding: 0.5rem 0 0.5rem 1.5rem;
+  border: 1px #dfd9d9 solid;
   align-items: center;
 }
 
 .icon__bar {
-  color: #F1FF31;
-  margin-right: 0.5rem;
+  margin-right: 0.4rem;
+  color: #3b729d;
+  font-size: 1.5rem;
 }
 
 .icon svg {
@@ -37,11 +41,11 @@ hr {
 }
 
 .container-flex__details__title {
+  display: flex;
+  align-items: center;
   background-color: #e8ecec;
   padding: 1rem 0 1rem 1.5rem;
   border: 1px #dfd9d9 solid;
-  display: flex;
-  align-items: center;
 }
 
 .icon__details {
