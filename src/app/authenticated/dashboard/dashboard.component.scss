@@ -11,8 +11,10 @@
 .container-flex__bar__title {
   display: flex;
   background-color: #e8ecec;
+  background-image: linear-gradient(to right, #e8ecec, #e9e4f0);
   padding: 0.5rem 0 0.5rem 1.5rem;
   border: 1px #dfd9d9 solid;
+  border-bottom: 1px solid #005E86;
   align-items: center;
 }
 
@@ -44,6 +46,7 @@ hr {
   display: flex;
   align-items: center;
   background-color: #e8ecec;
+  background-image: linear-gradient(to right, #e8ecec, #e9e4f0);
   padding: 1rem 0 1rem 1.5rem;
   border: 1px #dfd9d9 solid;
 }
