@@ -20,7 +20,7 @@ export class FacadeService {
 
   equipments$ = this.state.equipments$;
 
-  public stateData: EquipmentState[] = [];
+  public equipmentsStates: EquipmentState[] = [];
 
   load() {
     forkJoin([
@@ -32,8 +32,8 @@ export class FacadeService {
     ])
       .pipe(
         map(
-          ([equipments, models, positionHistory, stateHistory, stateData]) => {
-            this.stateData = stateData;
+          ([equipments, models, positionHistory, stateHistory, equipmentsStates]) => {
+            this.equipmentsStates = equipmentsStates;
 
             const equipmentsWithForeignKeys: any[] = equipments.map(
               (equipment) => {
@@ -52,7 +52,7 @@ export class FacadeService {
                   equipmentsModels,
                   equipmentsPositionHistory: equipmentsPositionHistory,
                   equipmentsStatesHistory: equipmentsStatesHistory,
-                  stateData: stateData,
+                  equipmentsStates: equipmentsStates,
                 };
               }
             );
@@ -114,19 +114,19 @@ export class FacadeService {
       {
         title: equipment.name,
         model: equipment.equipmentsModels.name,
-        productivity: { title: this.stateData[0].name, value: equipment.equipmentSumtHours.operando, color: this.stateData[0].color },
+        productivity: { title: this.equipmentsStates[0].name, value: equipment.equipmentSumtHours.operando, color: this.equipmentsStates[0].color },
         earnings: equipment.gainEquipment,
       },
       {
         title: equipment.name,
         model: equipment.equipmentsModels.name,
-        productivity: { title: this.stateData[1].name, value: equipment.equipmentSumtHours.parado, color: this.stateData[1].color },
+        productivity: { title: this.equipmentsStates[1].name, value: equipment.equipmentSumtHours.parado, color: this.equipmentsStates[1].color },
         earnings: equipment.gainEquipment,
       },
       {
         title: equipment.name,
         model: equipment.equipmentsModels.name,
-        productivity: { title: this.stateData[2].name, value: equipment.equipmentSumtHours.manutencao, color: this.stateData[2].color },
+        productivity: { title: this.equipmentsStates[2].name, value: equipment.equipmentSumtHours.manutencao, color: this.equipmentsStates[2].color },
         earnings: equipment.gainEquipment,
       },
     ];

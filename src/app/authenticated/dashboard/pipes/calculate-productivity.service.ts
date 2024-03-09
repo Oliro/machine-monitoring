@@ -72,16 +72,16 @@ export class CalculateProductivityService {
         //Converter a diferença de milissegundos para horas
         const currentStatusSumtHours = diffMs / (1000 * 60 * 60);
 
-        let equipmentStateCurrentDate = equipment.stateData.find(data => data.id === state.equipmentStateId)?.name;
+        let equipmentStateCurrentDate = equipment.equipmentsStates?.find(data => data.id === state.equipmentStateId)?.name;
 
         switch (equipmentStateCurrentDate) {
-          case equipment.stateData[0].name:
+          case equipment.equipmentsStates[0].name:
             equipmentSumtHours.operando += Math.ceil(currentStatusSumtHours)
             break;
-          case equipment.stateData[1].name:
+          case equipment.equipmentsStates[1].name:
             equipmentSumtHours.parado += Math.ceil(currentStatusSumtHours)
             break;
-          case equipment.stateData[2].name:
+          case equipment.equipmentsStates[2].name:
             equipmentSumtHours.manutencao += Math.ceil(currentStatusSumtHours)
             break;
         }
@@ -114,7 +114,7 @@ export class CalculateProductivityService {
     const equipmentModelEarnings = { operando: 0, parado: 0, manutencao: 0 }
 
     equipment.equipmentsModels.hourlyEarnings.forEach((item) => {
-      const equipmentEarning = equipment.stateData.find(state => state.id == item.equipmentStateId);
+      const equipmentEarning = equipment.equipmentsStates.find(state => state.id == item.equipmentStateId);
       switch (equipmentEarning?.name) {
         case 'Operando':
           equipmentModelEarnings.operando = item.value

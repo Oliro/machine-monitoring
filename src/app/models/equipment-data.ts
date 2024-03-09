@@ -10,7 +10,7 @@ export interface EquipmentData {
     equipmentsModels: EquipmentModel;
     equipmentsPositionHistory: EquipmentPositionHistory;
     equipmentsStatesHistory: EquipmentStateHistory;
-    stateData: EquipmentState[];
+    equipmentsStates: EquipmentState[];
     equipmentSumtHours: any;
     gainEquipment: GainEquipment;
 }
