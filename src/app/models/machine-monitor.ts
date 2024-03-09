@@ -8,9 +8,9 @@ export interface MachineMonitor {
     id: string;
     equipmentModelId: string;
     name: string;
-    equipments: Equipment
-    equipmentsModels: EquipmentModel;
+    equipments: Equipment[]
+    equipmentsModels: EquipmentModel[];
     equipmentsPositionHistory: EquipmentPositionHistory[];
-    equipmentsStatesHistory: EquipmentStateHistory;
+    equipmentsStatesHistory: EquipmentStateHistory[];
     equipmentsStates: EquipmentState[]
 }

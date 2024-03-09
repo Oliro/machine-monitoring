@@ -17,23 +17,23 @@ export class EquipmentsService extends BaseService {
   constructor(private http: HttpClient) { super(); }
 
   getEquipments(): Observable<Equipment[]> {
-    return this.http.get<MachineMonitor>(this.urlServiceV1).pipe(map((result) => result.equipments), tap(console.log));
+    return this.http.get<MachineMonitor>(this.urlServiceV1).pipe(map((result) => result.equipments));
   }
 
-  getEquipmentsModels(): Observable<EquipmentModel[]> {
-    return this.http.get<MachineMonitor>(this.urlServiceV1).pipe(map((result) => result.equipmentsModels), tap(console.log));
+  getEquipmentsModels(): Observable<EquipmentModel[] > {
+    return this.http.get<MachineMonitor>(this.urlServiceV1).pipe(map((result) => result.equipmentsModels));
   }
 
   getEquipmentsPositionHistory(): Observable<EquipmentPositionHistory[]> {
-    return this.http.get<MachineMonitor>(this.urlServiceV1).pipe(map((result) => result.equipmentsPositionHistory), tap(console.log));
+    return this.http.get<MachineMonitor>(this.urlServiceV1).pipe(map((result) => result.equipmentsPositionHistory));
   }
 
   getEquipmentsStatesHistory(): Observable<EquipmentStateHistory[]> {
-    return this.http.get<MachineMonitor>(this.urlServiceV1).pipe(map((result) => result.equipmentsStatesHistory), tap(console.log));
+    return this.http.get<MachineMonitor>(this.urlServiceV1).pipe(map((result) => result.equipmentsStatesHistory));
   }
 
   getEquipmentsStates(): Observable<EquipmentState[]> {
-    return this.http.get<MachineMonitor>(this.urlServiceV1).pipe(map((result) => result.equipmentsStates), tap(console.log));
+    return this.http.get<MachineMonitor>(this.urlServiceV1).pipe(map((result) => result.equipmentsStates));
   }
 
 }

@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { MachineMonitor } from '../../../models/machine-monitor';
 import { EquipmentData } from '../../../models/equipment-data';
 import { FacadeService } from '../facade.service';
+import { EquipmentModel } from '../../../models/equipment-model';
+import { EquipmentStateHistory } from '../../../models/equipment-state-history';
 
 @Injectable({
   providedIn: 'root'
@@ -34,7 +36,8 @@ export class CalculateProductivityService {
       let gainEquipmentTotal: number = 0;
       let gainEquipmentByState: number[]= [];
 
-      equipment.equipmentsStatesHistory.states.forEach((state, index, statesArray) => {
+      const equipmentsStatesHistory= equipment.equipmentsStatesHistory as unknown as EquipmentStateHistory
+      equipmentsStatesHistory.states.forEach((state, index, statesArray) => {
 
         // Acessa o próximo estado se ele existir de ative o calculo para o primeiro estado
         if (index < statesArray.length - 1 && nextStateDateUTC == 0) {
@@ -108,12 +111,12 @@ export class CalculateProductivityService {
     return equipmentData;
   }
 
-
   calculateGainEquipment(equipment: MachineMonitor, equipmentSumtHours: any) {
 
     const equipmentModelEarnings = { operando: 0, parado: 0, manutencao: 0 }
 
-    equipment.equipmentsModels.hourlyEarnings.forEach((item) => {
+    const equipmentsModels = equipment.equipmentsModels as unknown as EquipmentModel;
+    equipmentsModels.hourlyEarnings.forEach((item) => {
       const equipmentEarning = equipment.equipmentsStates.find(state => state.id == item.equipmentStateId);
       switch (equipmentEarning?.name) {
         case 'Operando':
