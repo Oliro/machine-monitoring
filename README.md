@@ -1,6 +1,8 @@
 # GPS MonitorTech 
-
+![Tela Tarefas](images-github/index-desktop.JPG)
 Este projeto foi desenvolvido utilizando os requisitos do Desafio frontend da Aiko.
+
+Você pode visualizar o projeto funcionando [aqui](https://oliro.github.io/machine-monitoring/).
 
 O **GPS MonitorTech** é um prototipo de sistema web SPA, responsivo e escalável, para coletar dados de equipamentos utilizados em operações florestais. Ele exibe o histórico de posições e estados dos equipamentos, proporcionando uma visão detalhada das atividades em campo. Este sistema  foi desenvolvido com tecnologias recentes e padrões de design para oferecer uma experiência eficiente e intuitiva.
 
@@ -43,6 +45,8 @@ O **GPS MonitorTech** é um prototipo de sistema web SPA, responsivo e escaláve
 - **Mockup com Json-server:** Durante o desenvolvimento, é utilizado o Json-server para simular o backend e fornecer dados fictícios para testes e prototipagem.
 
 O **GPS MonitorTech**, é um prototipo de sistema de operações florestais que pode ser usado como uma ferramenta poderosa para monitorar, analisar e otimizar as atividades, garantindo maior eficiência e produtividade nas operações.
+
+![Tela Tarefas](images-github/index-mobile.JPG)
 
 # MachineMonitoring
 
