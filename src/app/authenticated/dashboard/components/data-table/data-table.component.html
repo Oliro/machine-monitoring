@@ -19,8 +19,8 @@
       <tr>
 
         <td class="onclick-table" (click)="equipmentDatails(item)">{{item.name}}</td>
-        <td>{{item.equipmentsModels.name}}</td>
-        <td>
+        <td class="onclick-table" (click)="equipmentDatails(item)">{{item.equipmentsModels.name}}</td>
+        <td class="onclick-table" (click)="equipmentDatails(item)">
           <span class="badge" [ngStyle]="{'background-color': facade.getLatestState(item)?.state?.color}">
             {{ facade.getLatestState(item)?.state?.name }}
           </span>
