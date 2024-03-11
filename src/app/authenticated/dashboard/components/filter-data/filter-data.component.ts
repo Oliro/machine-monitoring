@@ -2,13 +2,13 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { provideNativeDateAdapter } from '@angular/material/core';
+import { MAT_DATE_LOCALE, provideNativeDateAdapter } from '@angular/material/core';
 import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-filter-data',
   standalone: true,
-  providers: [provideNativeDateAdapter()],
+  providers: [provideNativeDateAdapter(), {provide: MAT_DATE_LOCALE, useValue: 'pt-BR'}],
   imports: [
     FormsModule,
     MatExpansionModule,
