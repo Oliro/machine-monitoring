@@ -28,8 +28,8 @@ export class EquipmentDataPipe implements PipeTransform {
 
   private filterEquipmentPositionDate(equipments: EquipmentData[], filter: any) {
 
-    let startDate = new Date('Wed Feb 22 2021 00:00:00 GMT-0300 (Horário Padrão de Brasília)');
-    let endDate = new Date('Wed Feb 27 2021 00:00:00 GMT-0300 (Horário Padrão de Brasília)');
+    let startDate = new Date('Wed Feb 22 2024 00:00:00 GMT-0300 (Horário Padrão de Brasília)');
+    let endDate = new Date('Wed Feb 27 2024 00:00:00 GMT-0300 (Horário Padrão de Brasília)');
 
     const startDateUTC = startDate.getTime();
     const endDateUTC = endDate.getTime();

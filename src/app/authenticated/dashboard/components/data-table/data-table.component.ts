@@ -21,8 +21,8 @@ export class DataTableComponent implements OnInit  {
 
   ngOnInit(): void {
 
-    this.filter.startDate = new Date('Wed Feb 25 2021 00:00:00 GMT-0300 (Horário Padrão de Brasília)');
-    this.filter.endDate = new Date('Wed Feb 25 2021 00:00:00 GMT-0300 (Horário Padrão de Brasília)');
+    this.filter.startDate = new Date('Wed Feb 25 2024 00:00:00 GMT-0300 (Horário Padrão de Brasília)');
+    this.filter.endDate = new Date('Wed Feb 25 2024 00:00:00 GMT-0300 (Horário Padrão de Brasília)');
 
     this.facade.load();
   }
