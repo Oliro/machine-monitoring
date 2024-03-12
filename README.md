@@ -22,9 +22,9 @@ O **GPS MonitorTech** é um prototipo de sistema web SPA, responsivo e escaláve
 
 ## Tecnologias Utilizadas
 
-- **Angular 17:** O frontend da aplicação é desenvolvido com Angular 17, com proposito de ser moderno robusto e escalável.
+- **Angular 17:** O frontend da aplicação é desenvolvido com Angular 17, com propósito de ser moderno robusto e escalável.
 
-- **SCSS:** Foi utilizado scss com metodologia BEM para o visual e para disposição dos elementos na interface que é organizada utilizando CSS Grid Layout, garantindo uma experiência responsiva e adaptável a diferentes dispositivos.
+- **SCSS:** Foi utilizado SCSS com metodologia BEM para o visual e disposição dos elementos na interface, e para melhor organização optei por CSS Grid Layout, garantindo uma experiência responsiva e adaptável a diferentes dispositivos.
 
 - **Angular Material:** Componentes do Angular Material são empregados em algumas partes para garantir melhor experiência ao usuário
 
@@ -34,7 +34,7 @@ O **GPS MonitorTech** é um prototipo de sistema web SPA, responsivo e escaláve
 
 - **Facade Pattern:** Para abstração de regras de negócio complexas, é utilizado o padrão de projeto estrutural Facade, promovendo uma arquitetura modular e flexível.
 
-- **SOLID e Clean Code:** Princípios SOLID e boas práticas de programação são aplicados para garantir um código limpo, legível e fácil de dar manutenção.
+- **SOLID e Clean Code:** Princípios SOLID e boas práticas de programação são aplicados para garantir um código limpo, legível e de fácil manutenção.
 
 - **Gráficos e Tabelas Reativas:** O sistema utiliza serviços de gerenciamento de estado com RXJS para fornecer gráficos e tabelas reativos, garantindo uma visualização dinâmica e atualizada dos dados.
 
@@ -44,7 +44,7 @@ O **GPS MonitorTech** é um prototipo de sistema web SPA, responsivo e escaláve
 
 - **Mockup com Json-server:** Durante o desenvolvimento, é utilizado o Json-server para simular o backend e fornecer dados fictícios para testes e prototipagem.
 
-O **GPS MonitorTech**, é um prototipo de sistema de operações florestais que pode ser usado como uma ferramenta poderosa para monitorar, analisar e otimizar as atividades, garantindo maior eficiência e produtividade nas operações.
+O **GPS MonitorTech**, é um protótipo de sistema de operações florestais que pode ser usado como uma ferramenta poderosa para monitorar, analisar e otimizar as atividades, garantindo maior eficiência e produtividade nas operações.
 
 ![Tela Tarefas](images-github/index-mobile.JPG)
 
