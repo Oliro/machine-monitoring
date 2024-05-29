@@ -1,6 +1,5 @@
 # GPS MonitorTech 
 ![Tela Tarefas](images-github/index-desktop.JPG)
-Este projeto foi desenvolvido utilizando os requisitos do Desafio frontend da Aiko.
 
 Você pode visualizar o projeto funcionando [aqui](https://oliro.github.io/machine-monitoring/).
 
